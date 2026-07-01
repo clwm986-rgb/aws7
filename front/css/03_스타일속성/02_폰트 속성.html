@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>폰트 속성 예제</title>
+	<!--
+	color p.105
+	- 글자 색상
+
+	<색상지정 방식>
+	1. 미리 지정된 이름을 사용
+		- red, blue, green 과 같은 100개가 넘는 이름
+	2. rgb 함수/ rgba함수를 이용
+		- rgb(r숫자, g숫자, b숫자), rgba(r숫자, g숫자, b숫자, 투명도)
+		- 숫자 : 0~255 / r: 빨강 / g: 녹색 / b : 파랑
+		- 투명도 : 0~1
+			-> 0 : 투명 / 1 : 불투명
+	3. 16진수 이용
+		- red => rgb(255,0,0) => #ff0000 => f00
+	4. hsl(색상, 채도, 명도) 
+		- 색상, 채도, 명도를 아용하여 색상을 표시 => rgb보다 더 넓은 범위의 색상 표현 가능
+	font-weight(p90)
+		- 폰트 굵기
+		- 100~900의 값을 100단위로 사용
+		- nomal : 400
+		- bold : 700
+
+	font-size p.91
+		- 폰트 크기
+		- 숫자와 단위를 함께 사용(단위 필수!)
+
+	font-family
+		- 폰트 종류를 지정
+		- 일반적으로 여러 폰트를 한번에 함께 지정
+			* 폰트가 없을 수 있음
+			* 제일 왼쪽 부터 적용해서 있으면 적용, ㄴㄴ면 옆으로 이동
+			* 보통 제일 오른쪽은 기본 폰트 중 하나를 선택(monospaece, serif, sans-serif)
+		- 한글명 폰트는 영문도 함께 작성
+		- 폰트명 공백이 있으면 '' or " " 사용
+		
+	-->
+		<style>
+			*{font-size: 30px; font-weight: bold;}
+			.box1{font-family: 'Courier New', Courier, monospace; color: aqua;}
+			.box2{font-family: 'Times New Roman', Times, serif; color: #00ff00;}
+			.box3{font-family: Arial, Helvetica, sans-serif; color: rgb(0,0,255, 0.5 blue);}
+		</style>
+
+</head>
+<body>
+	<h1>font-family 예제</h1>
+	<div class="box1">ㅎㅇㅎㅇaaa</div>
+	<div class="box2">ㅎㅇㅎㅇaaa</div>
+	<div class="box3">ㅎㅇㅎㅇaaa</div>
+
+</body>
+</html>

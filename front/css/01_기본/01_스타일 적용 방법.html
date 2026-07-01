@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>스타일 적용 방법</title>
+	<!--
+	스타일 적용 방법1. 태그의 style을 이용
+	- 우선수순위 가장 높음 -> 무조건 적용
+	- 해당 태그에먼 적용
+
+	스타일 적용 방법2. style 태그를 이용
+	- head 태그에 배치
+	- 같은 문서에 있는 태그들을 꾸며줌
+	- 선택자를 이용 -> 원하는 태그들을 고르는 방법
+
+	스타일 적용 방법3. link 태그를 이용
+	- 이미 만들어진 스타일을 가져옴 (확장자 css)
+	- 최초 1회만 다운, 이후에는 캐시에서 가져옴
+	-->
+	<style>
+			/*
+	선택자{
+		속성 : 값; 속성:값
+	}
+	*/
+	#name{
+		color: aquamarine;
+	}
+	.name{
+		color: beige;
+	}
+	
+	</style>
+	<link rel="stylesheet" href="01_스타일 적용 방법.css">
+</head>
+<body>
+	<!--
+	<태그 styke = 속성 : 값; 속성:값>
+	-->
+	<div style="color: aqua;">안녕
+		<div>ㅎㅇ</div>
+		<div id="name">홍길동</div>
+		<div class="name">홍길동</div>
+		<div class="name">홍길동</div>
+		<div class="name1">홍길동</div>
+	</div>
+</body>
+</html>
