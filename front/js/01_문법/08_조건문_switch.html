@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>switch문</title>
+</head>
+<body>
+	<script>
+		/*
+		switch문
+		- 조건문 중에서 일부만 사용 가능
+		- 변수 값이 특정 값을 가지는지 확인할 때 사용
+		문법
+		switch(변수){
+		case 값1:
+			실행문;
+			break;
+		case 값2:
+			실행문2;
+			break;
+			defautl:
+			실행문3;
+		}
+			// 위 switch는 if문으로 바꾸면 아래와 같음
+			if(변수 == 값1){
+			실행문
+			}
+			if(변수 == 값1){
+			실행문
+			}
+			else if(변수 == 값2){
+			실행문2;
+			}
+			elsw{
+			실행문3;
+			}
+		*/ 
+		/* 월의 마지막이 몇일인지 알려주는 예제
+		31 : 1,3,5,7,8,10,12
+		30 : 4,6,9,11
+		28 : 2
+		*/
+		let 월 = 1;
+		switch(월){
+			// if(월 ==1 || 월 ==5 ||월 ==7 ||월 ==8 ||월 ==9 ||월 ==10 ||)
+			case 1: case3: case5: case7: case8:
+				document.write(월 +"은 31일 까지 있습니다.<br>");
+				break;
+			case 2:
+				document.write(월 +"은 28일 까지 있습니다.<br>");
+			case 4: case6: case9: case7: case11:
+				document.write(월 +"은 30일 까지 있습니다.<br>");
+				break;
+			default:
+				document.write(월 +"은 30일 까지 있습니다.<br>");
+		}
+	</script>
+</body>
+</html>

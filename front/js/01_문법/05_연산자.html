@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>연산자 예제</title>
+</head>
+<body>
+	<script>
+		/*
+		연산자 종류
+		1. 산술 연산자
+		: =+, -, *, /, %(나머지), **(제곱)
+		*/ 
+		document.write(`<h1>산술 연산자 예제</h1>`)
+		document.write(`2 + 3 = ${2 + 3} <br>`)
+		document.write(`2 - 3 = ${2 - 3} <br>`)
+		document.write(`2 * 3 = ${2 * 3} <br>`)
+		document.write(`2 / 3 = ${2 / 3} <br>`)
+		document.write(`2 % 3 = ${2 % 3} <br>`)
+		document.write(`2 ** 3 = ${2 ** 3} <br>`)
+
+		/*
+		2. 비교 연산자 : 숫자 크기 비교
+		: <, >, <=, >=, ==, ===, !=, !==
+		== , != : 값만 봄, 타입을 신경 안씀
+		===, !== : 값과 타입을 함께 봄
+		*/ 
+		document.write('<h1>비교 연산자</h1>')
+		document.write(`1 == '1'? ${1 == '1'}<br>`)
+		document.write(`1 ==='1'? ${1 === '1'}<br>`)
+		document.write(`1 != '1'? ${1 != '1'}<br>`)
+		document.write(`1 !=='1'? ${1 !== '1'}<br>`)
+
+		/*
+		3. 논리 연산자
+			- 참 or 거짓을 판별
+
+			* 거짓
+				: false, 0, null, undefined, '', NaN
+			* 참
+				: 거짓이 아닌 모든 값
+			* && : and 연산자 
+					: ~이고
+					: 둘다 참일 때 참 => 하나라도 거짓이면 거짓
+			* || : or 연산자
+					: ~ 이거나
+					: 하나랃 참이면 참
+			* ! : not 연산자
+				: 반대
+				- 참이면 거짓, 거짓애면 참
+
+		*/ 
+		let 면허증 = false;
+		let 민증 = true;
+		let 여권 = false;
+
+		document.write('<h1>논리 연산자</h1>')
+		document.write('보유 신분증 : 면허증 x, 민증o, 여권 x <br>')
+		document.write(`신분증 챙겼나요? ${면허증 || 민증 || 여권}<br>`)
+
+		let score = 85;
+		document.write(`${score}점은 A학점 인가요?${score >= 90 && score <= 100}<br>`)
+		document.write(`${score}점은 B학점 인가요?${score >= 80 && score <= 90}<br>`)
+
+		let age = 20; //만 나이 20, 성인 : 19세 이상 => age >=19
+		document.write(`${age}살은 미성년자 인가요? ${!(age >= 19)}<br> `)
+
+		/*
+		4. 대입 연산자 = 
+			: 오른쪽에 있는 값을 왼쪽에 저장
+			: a = 10; 가능 10 = a; 불가능
+		*/ 
+	</script>
+</body>
+</html>
