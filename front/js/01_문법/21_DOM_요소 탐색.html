@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>요소 탐색</title>
+	<style>
+		div{
+			padding: 10px; border: 3px solid yellowgreen;
+			margin: 10px; background: white;
+		}
+
+		.center-box{
+			border-color: violet;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		컨테이너
+		<div class="inner-container">
+			이너 컨테이너
+			<div class="container">
+				<div class="left-box">
+					왼쪽 박스1
+					<div class="box box1">1</div>
+					<div class="box box2">2</div>
+					<div class="box box3">3</div>
+				</div>
+				<div class="left-box">
+					왼쪽 박스2
+					<div class="box box1">1</div>
+					<div class="box box2">2</div>
+					<div class="box box3">3</div>
+				</div>
+				<div class="center-box">
+					기준 박스
+					<div class="box box1">1</div>
+					<div class="box box2">2</div>
+					<div class="box box3">3</div>
+				</div>
+				<div class="right-box">
+					오른쪽 박스1
+					<div class="box box1">1</div>
+					<div class="box box2">2</div>
+					<div class="box box3">3</div>
+				</div>
+				<div class="right-box">
+					오른쪽 박스2
+					<div class="box box1">1</div>
+					<div class="box box2">2</div>
+					<div class="box box3">3</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		/*
+		탐색 : 다른 요소를 찾음
+			- 조상, 자손, 형제
+
+		1. 부모 요소 선택
+			- 요소.parentElement
+
+		2. 조상 요소 선택
+			- 요소.closest('선택자')
+			- 요소의 조상들 중 선택자와 일치하는 가자 가까운 조상 요소를 선택
+			- 없으면 null
+
+		3. 첫번째 자식 요소 탐색	
+			- 요소.firstElementChild
+
+		4. 마지막 자식 요소 탐색
+			- - 요소.lastElementChild
+
+		5. 모든 자식 요소 탐색
+			- children
+			- forEach 사용 못 함
+
+		6. 자손 탐색
+			- 요소.querySelector('선택자')
+			- 요소.querySelectorAll('선택자')
+
+		7. 뒤에 잇는 현제 탐색
+			- 요소.nextElementSibling
+
+		8. 앞에 잇는 형제 탐색
+			- 요소.previousElementSibling
+
+		9. 형제 탐색 응용
+			- 형제들 중 선택자와 일치하는 요소 선택
+			- 요소.parenElement.querySelector('선택자')
+		*/ 
+	
+		const std = document.querySelector('.center-box');
+		std.parentElement.style.borderColor = "yellow" //부모 요소에 테두리 색상 변경
+		std.closest(".container").style.background = "green"//조상 요소 중 클래스가 container 이면서 기준 요소와 가장 가까운 요소에 배경의 색상변경
+		std.firstElementChild.style.background = "skyblue"//첫번째 자식 요소에 배경의 색상 변경
+		std.lastElementChild.style.background = "pink";//마지막 자식 요소애 배경의 색상 변경
+		 const children = std.children;//모든 자식 요소으 테두리를 점선으로
+		 for(i=0; i< children.length; ++i){
+			children[i].style.borderStyle = "dotted";
+		 }
+
+		 std.previousElementSibling.style.borderWidth = '10px';//앞에 잇는 형제 테두리를 10px
+
+		 std.nextElementSibling.style.borderWidth = '20px';//뒤에 잇는 형제 테두리를 20px
+
+		 //모든 형제 요소에 배경 색을 변경
+		 const siblings = [...std.parentElement.children].filter((child)=>child !== std);
+		siblings.forEach((sibling)=>{return sibling.style.background = 'yellow'});
+	</script>
+</body>
+</html>

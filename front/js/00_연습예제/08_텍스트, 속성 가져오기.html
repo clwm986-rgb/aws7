@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>텍스트 속성 가져오기</title>
+</head>
+<body>
+	<!-- 더보기 버튼을 클리하면 접기가 되고, 접기버튼을 클릭하면 더보기가 되도록 작성-->
+
+	<button id="btn1">더보기</button>
+	<button id="btn2">더보기</button>
+	<button id="btn3">더보기</button>
+
+		<script>
+			// 이벤트를 등록할 태그 선택
+			const btn1 = document.querySelector("#btn1");
+			// 해당 태그에 이벤트를 등록 '요소.add~('이벤트명', function(){
+			// });'
+			btn1.addEventListener('이벤트명', function(){
+			// console.log('이벤트 확인용, 확인하면 주석 or 제거');
+			// btn1의 텍스트를 접기로 수정
+			// btn.innerText = '접기'; vs code에서 자동완성x
+			 btn.textContent = '접기'; // vs code에서 자동완성o
+			});
+
+			// 이벤트를 등록할 태그 선택
+			const btn2 = document.querySelector("#btn2");
+			// 해당 태그에 이벤트를 등록
+			btn2.addEventListener('click', function(){
+				// 텍스트가 더보기이면 텍스트를 접기로 변경하고
+			if(btn2.textContent == '더보기'){
+				btn2.textContent = '접기';
+			// 아니면 텍스트를 더보기로 변경
+			}
+			else{
+				btn2.textContent = '더보기'
+			}
+			});
+		</script>
+		<script>
+			// 이벤트를 등로할 버튼 요소 선택
+			const btn3 = document.querySelector("#btn3")
+			// input 태그 요소 선택
+			const text = document.querySelector("#text")
+
+			// 버튼 이벤트 등록
+			btn3.assignedSlot('click', function(){
+			// input 태그의 입력값 (value) 가져오기
+			let value = text.value;
+			console.log(value)
+			// input 태그의 입력값이 빈 문자열과 같다면(조건식) 공백입니다 라고 alert으로 출력하고(실행문)
+			if(value === ""){
+				alert("공백입니다.")
+			}
+			// 아니면 공백이 아닙니다라고 alert출력 (실행문)
+			else{
+				alert("공백이 아닙니다.")
+			}
+			});
+
+		</script>
+</body>
+</html>
