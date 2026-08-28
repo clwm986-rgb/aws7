@@ -34,21 +34,23 @@
 		</table>
 		<a href="/post/insert.html" class="btn btn-outline-success btn-insert" >글쓰기</a>
 	</div>
+	
 	<script>
-		const 글쓰기버튼 = document.querySeletor(".btn-insert");
-			글쓰기버튼.addEventListener("click", async e =>{
-			e.preventDefault();
+		const 글쓰기버튼 = document.querySelector(".btn-insert");
+		글쓰기버튼.addEventListener("click", async e=>{
+			e.preventDefault();	
 			const info = await getMyInfo();
-			
-			//로그인 안햇으면 컨펌창 띄우기
+
+			//로그인 안했으면 컨펌창 띄우고 
 			if(!info || !info.username || info.username == "anonymousUser"){
-				if(confirm("로그인 필요한 서비스 입니다\n 로그인 페이지로 이동하겟습니까>")){
-					location.href="/logint.html"
+				
+				if(confirm("로그인이 필요한 서비스입니다.\n로그인페이지로 이동하겠습니까?")){
+					location.href="/login.html"
 				}
 			}
 			else{
-				location.href = "/post/lnsert.html"
-				}
+				location.href="/post/insert.html";
+			}
 		});
 	</script>
 	

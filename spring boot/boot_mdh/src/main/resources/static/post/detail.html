@@ -66,8 +66,8 @@
 		
 		//이벤트 등록
 		deleteBtn.addEventListener("click", async e => {
-			if(!confirm("게시글을 정말로 삭제하겟습니까?")){
-				return;	
+			if(!confirm("게시글을 정말로 삭제하겠습니까?")){
+				return;
 			}
 			try{
 				//서버로 요청
@@ -84,7 +84,6 @@
 				const result = await response.text();
 				alert(result);
 				location.href = "/post/list.html";
-				
 			}catch(e){
 				console.error(e);
 			}

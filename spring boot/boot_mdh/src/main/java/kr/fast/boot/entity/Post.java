@@ -11,12 +11,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "post")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Post {
 	
 	@Id
@@ -55,10 +57,12 @@ public class Post {
 	public void delete() {
 		isDeleted = "Y";
 	}
+
 	public void update(String title, String content) {
 		this.title = title;
 		this.content = content;
 		
 	}
+
 	
 }

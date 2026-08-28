@@ -1,14 +1,17 @@
 package kr.fast.community.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.jsonwebtoken.security.Password;
 import kr.fast.community.dto.LoginRequest;
 import kr.fast.community.dto.MessageResponse;
 import kr.fast.community.dto.SignupRequest;
 import kr.fast.community.entity.Member;
 import kr.fast.community.repository.MemberRepository;
+import kr.fast.community.security.JwtProvider;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -19,6 +22,8 @@ public class AuthService {
    
    private final BCryptPasswordEncoder passwordEncoder;
 
+   private final JwtProvider jwtProvider;
+   
    @Transactional
    public MessageResponse signup(SignupRequest request) {
       //아이디, 비번, 이메일 체크
@@ -56,13 +61,16 @@ public class AuthService {
             throw new IllegalArgumentException("서버 이상입니다.");
       }
       //회원 정보를 가져옵니다. 없으면 예외발생
-      
-      //비밀번호 확인 후 일치하지 않으면 예외발생
-      
-      //사원증(토큰) 발급
-      
-      //사원증 리턴
-      
-      return null;
+       Member user = memberRepository.findById(request.id())
+               .orElseThrow(() -> new IllegalArgumentException("아이디나 비번이 일치하지 않습니다."));
+       
+       // 비밀번호 확인 후 일치하지 않으면 예외발생
+       if(!passwordEncoder.matches(request.pw(), user.getPw())) {          
+          throw new IllegalArgumentException("아이디나 비번이 일치하지 않습니다."); 
+       }
+       // 사원증(토큰) 발급
+       String accesssToken =jwtProvider.createToken(user.getId(),user.getRole());
+       // 사원증 리턴
+       return accesssToken;
    }
 }

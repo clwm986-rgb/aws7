@@ -37,7 +37,7 @@ public class PostService {
 			throw new IllegalArgumentException("잘못된 게시판입니다.");
 		}
 		
-		//로그인한 회원이 아니며
+		//로그인한 회원이 아니면
 		if(username == null || username.equals("anonymousUser")) {
 			throw new IllegalArgumentException("로그인 필요합니다.");
 		}
@@ -46,16 +46,16 @@ public class PostService {
 			Post post = new Post(dto.title(), dto.content(), username, dto.boardId());
 			//레포야 엔티티 줄게 저장해.
 			Post savedPost = postRepository.save(post);
-			return savedPost.getId();
 			
-		} catch (Exception e) {
+			return savedPost.getId();
+		}catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("쿼리 실행 중 이상이 생김");
+			throw new RuntimeException("쿼리 실행 중 이상이 생겼습니다.");
 		}
 	}
 	@Transactional
 	public List<Post> getPostList() {
-		//내림차순=>최신 게시글이 제일 처음
+		//내림차순=>최신 게시글이 제일처음
 		List<Post> list = postRepository.findAllByIsDeletedOrderByIdDesc("N");
 		//List<Post> list = postRepository.findAll();//오름차순=>최신 게시글이 제일 마지막
 		
@@ -87,7 +87,7 @@ public class PostService {
 		if(post.getIsDeleted().equals("Y")) {
 			throw new IllegalArgumentException("이미 삭제된 게시글입니다.");
 		}
-		//삭제하려는 사람이 작성자가 아니면 (보통은 이런일이 발생ㄴㄴ)
+		//삭제하려는 사람이 작성자가 아니면(보통은 이런일이 발생하지 않음)
 		if(!post.getMemberId().equals(username)) {
 			throw new IllegalArgumentException("작성자가 아닙니다.");
 		}
@@ -105,9 +105,11 @@ public class PostService {
 		//id와 일치하는 게시글을 가져옴
 		Post post = postRepository.findById(id)
 				.orElseThrow(()->new IllegalArgumentException("등록되지 않은 게시글입니다."));
+		
 		if(!post.getMemberId().equals(username)) {
 			throw new IllegalArgumentException("작성자가 아닙니다.");
 		}
+		
 		//수정할 제목과 내용 체크
 		if(dto == null || !dto.checkTitleValid()) {
 			throw new IllegalArgumentException("제목을 입력하세요.");

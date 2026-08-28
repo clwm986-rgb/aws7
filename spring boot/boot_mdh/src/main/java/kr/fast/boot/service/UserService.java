@@ -17,6 +17,7 @@ public class UserService {
 	private final MemberRepository memberRepository;
 	
 	private final BCryptPasswordEncoder passwordEncoder;
+	
 	@Transactional
 	public void signup(SignupDTO dto) {
 		//아이디 체크. 아이디는 최소 3자이상
@@ -47,8 +48,7 @@ public class UserService {
 		
 		Member savedMember = memberRepository.save(member);
 		
-	}
-	
+	}	
 }
 
 

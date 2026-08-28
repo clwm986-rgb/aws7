@@ -44,11 +44,11 @@ public class PostController {
 	public ResponseEntity<Object> post(
 			@RequestBody PostDTO dto,
 			@AuthenticationPrincipal String username){
-System.out.println(username);
+		
 		try {
 			//서비스야 게시글 정보 줄테니 등록해줘.
 			//서비스야.게시글등록해줘(게시글정보);
-			int  postId = postService.insertPost(dto, username);
+			int postId = postService.insertPost(dto, username);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("postId", postId);
 			map.put("msg", "게시글을 등록했습니다.");
@@ -91,21 +91,20 @@ System.out.println(username);
 		}catch(Exception e) {
 			return ResponseEntity.ok(e.getMessage());
 		}
-		
 	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> idPut(
 			@PathVariable("id") int id,
 			@RequestBody PostDTO dto,
 			@AuthenticationPrincipal String username){
-		
+
 		try {
-			//서비스야 게시글 삭제해줘. 번호 여기있어
-			postService.updatePost(id,dto,username);
+			postService.updatePost(id, dto, username);
 			return ResponseEntity.ok("게시글을 수정했습니다.");
 		}catch(Exception e) {
 			return ResponseEntity.ok(e.getMessage());
 		}
-		
 	}
+	
 }

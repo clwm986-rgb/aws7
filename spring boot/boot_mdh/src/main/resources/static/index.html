@@ -15,14 +15,13 @@
 		<h2><span id="username">~~님</span>환영합니다.</h2>
 	</div>
 	<script>
-	async function hello(){
-	const info = await	getMyInfo();
-	
-	const 스팬 = document.querySelector("#username");
-	console.log(info)
-	스팬.textContent = `${info.username}님 `;
-	}
-	hello();
+		async function hello(){
+			const info = await getMyInfo();
+			
+			const 스팬 = document.querySelector("#username");
+			스팬.textContent = `${info.username}님 `;
+		}
+		hello();
 	</script>
 </body>
 </html>
