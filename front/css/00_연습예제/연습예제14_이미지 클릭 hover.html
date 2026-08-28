@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>이미지에 커서 올리면 color배경 나오기</title>
+	<style>
+			.container{
+				width: 150px; height: 150px; overflow: hidden;
+				box-shadow: 0 0 20px pink; /* 박스 그림자로 테두리 효과 적용 */
+				border-radius: 4px; /* 둥근 테두리 */
+				position: relative; /* 클릭의 기준이 되기 위해 */
+			}
+			.box{
+				
+				position: absolute; /* 박스를 absolute로 container 전체를 감싸도록 배치 */
+				left: 0; right: 0;/* 글자를 위 아래 가운데 배치하기 위해 패딩으로 위 아래 여백 조절*/
+				top: 0; bottom: 0;
+				padding: 60px 0; 
+				background: paleturquoise;/* 배경 흰색으로 설정, 투명이면 이미지 보일 수 있음*/
+				line-height: 30px; /* 한줄을 30px로 고정하여 높이를 맞춤*/
+				font-size: 18px;
+				text-align: center; /* 글자 좌 우 가운데 정렬*/
+				display: none; /* 처음에 박스가 안보이도록 */
+			}
+			.container:hover .box{
+				display: block;
+			}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+			<img src="../../img/ㄱㅊㅍㅊ.jpg" alt="구치파치" width="150" height="150px">
+			<div class="box">클릭</div>
+		</div>
+</body>
+</html>

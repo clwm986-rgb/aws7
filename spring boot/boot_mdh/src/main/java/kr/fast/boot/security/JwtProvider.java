@@ -1,0 +1,94 @@
+package kr.fast.boot.security;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+
+@Component
+//토큰의 발급, 파싱, 유효성 검증하는 클래스
+public class JwtProvider{
+
+	//JWT을 만들 때 사용될 문자열 => 노출되면 안됨.
+    private final SecretKey key;
+    //어세스토큰 유지 시간
+    private final long accessTokenInMs;
+    //리프레쉬토큰 유지 시간    
+    private final long refreshTokenInMs;
+
+    //생성자
+    public JwtProvider(
+    		//@Value : application.properties에 잇는 값을 가져옴
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.access-tokenin-ms}") long accessTokenInMs,
+    		@Value("${jwt.refresh-token-in-ms}") long refreshTokenInMs){
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.accessTokenInMs = accessTokenInMs;
+        this.refreshTokenInMs = refreshTokenInMs;
+    }
+
+    //토큰 생성 코드
+    public String createToken(String username, String role){ //사용자 이름, 권한
+    	//토큰 생성 시간
+        Date now = new Date();
+        //토큰 만료 시간
+        Date validity = new Date(now.getTime() + accessTokenInMs);
+
+        return Jwts.builder()
+                .subject(username)
+                .claim("role", role)
+                .issuedAt(now)
+                .expiration(validity)
+                .signWith(key)
+                .compact();//JWTBuilder 객체를 문자열로 만듬(토큰), 얘가 토큰을 만든거라 꼭 마지막에 넣어야함.
+    }
+
+    //토큰에서 소유주(username)을 가져옴
+    public String getUsername(String token){
+        return parseClaims(token).getSubject();
+    }
+    //토큰에서 권한을 가져옴(claim)
+    public String getRole(String token){
+        return parseClaims(token).get("role", String.class);
+    }
+    //토큰이 유효한 토큰인지 확인
+    public boolean validateToken(String token){
+        try {
+            parseClaims(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
+    //토큰을 이용하여 Claims 객체를 가져오는 기능
+    private Claims parseClaims(String token){
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+    public String createRefreshToken(String username) {
+    	//토큰 생성 시간
+        Date now = new Date();
+        //토큰 만료 시간
+        Date validity = new Date(now.getTime() + refreshTokenInMs);
+
+        return Jwts.builder()
+                .subject(username)
+                .claim("type", "refresh")
+                .issuedAt(now)
+                .expiration(validity)
+                .signWith(key)
+                .compact();//JWTBuilder 객체를 문자열로 만듬(토큰), 얘가 토큰을 만든거라 꼭 마지막에 넣어야함.
+    }
+    public boolean isRefreshToken(String refreshToken) {
+    	return "refresh".equals(parseClaims(refreshToken).get("type"));
+    }
+}

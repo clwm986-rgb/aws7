@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>이미지 확대 예제 (+ transition)</title>
+	<style>
+		.box{ width: 150px; position: relative; /* 박스들을 오른쪽으로 옮기기 위해 */}
+
+		.wrap{
+			width: 100%; height: 150; /* 이미지를 확대 했을 때 넘어가는 부분이 안보이게 하기 위해 */
+			overflow: hidden; /* 둥근 테두리 */
+			border-radius: 4px; /* 박스 그림자로 테두리 지정 */
+			box-shadow : 0 0 2px 0 rgb(163, 211, 255)
+			}
+		.title{line-height: 20px; margin-top: 5px;} /* 글자 한줄의 높이를 20px 고정 -> 높이가 20px로 고정 */
+		.line{display: block;} /* 시작 글자와 이미지 사이의 간격을 띄움 */
+		.box:hover img{transform: scale(1.5);} /* 이미지를 1.5배 확대 */
+		.box:hover .line{text-decoration: underline;} /* 커서를 갖다되면 밑줄이 생김 */
+		.box img{
+			transition: transform 200ms;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<!-- 이미지가 들어갈 박스 -->
+		<div class="wrap">
+			<img src="../../img/ㄱㅊㅍㅊ.jpg" alt="구치파치" width="150">
+		</div>
+		<!-- 이미지 설명 문구 -->
+		<div class="title">
+			<span class="line">이 이미지는</span>
+			<span class="line">좋습니당</span>
+		</div>
+	</div>
+</body>
+</html>
