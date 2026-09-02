@@ -9,30 +9,41 @@
 <script src="/js/post/list.js"></script>
 </head>
 <body>
-	<app-header></app-header>
-	<div class="container">
-		<h1>게시글 목록</h1>
-		<table class="table table-hover">
-		  <thead>
-		    <tr>
-		      <th>번호</th>
-		      <th>제목</th>
-		      <th>작성자</th>
-		      <th>작성일</th>
-		      <th>추천/비추천</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>1</td>
-		      <td><a href="/post/detail.html?num=1">공지사항입니다.</a></td>
-		      <td>asd</td>
-		      <td>2026-08-20</td>
-		      <td>0/0</td>
-		    </tr>
-		  </tbody>
-		</table>
-		<a href="/post/insert.html" class="btn btn-outline-success btn-insert" >글쓰기</a>
-	</div>
+   <app-header></app-header>
+   <div class="container">
+      <h1>게시글 목록</h1>
+      <hr>
+      <form class="input-group mb-3" onesubmit="submitSearch()">
+         <select class="form-control" name="type" oninput="changeInput(event)">
+            <option value="all">전체</option>
+            <option value="title">제목</option>
+            <option value="writer">작성자</option>
+         </select>
+           <input type="text" class="form-control" name="keyword" oninput="changeInput(event)">
+           <button class="btn btn-success" type="submit">검색</button>
+      </form>
+      
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>추천/비추천</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><a href="/post/detail.html?num=1">공지사항입니다.</a></td>
+            <td>asd</td>
+            <td>2026-08-20</td>
+            <td>0/0</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="/post/insert.html" class="btn btn-outline-success btn-insert" >글쓰기</a>
+   </div>
 </body>
 </html>

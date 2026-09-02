@@ -1,7 +1,11 @@
 package kr.fast.community.controller;
 
+
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.fast.community.dto.MessageResponse;
@@ -27,7 +32,14 @@ public class PostController {
    private final PostService postService;
    
    @GetMapping("")
-   public ResponseEntity<Object> get(){
+   public ResponseEntity<Object> get(
+         @RequestParam(required = false, defaultValue = "all", name="type")String type,
+         @RequestParam(required = false, defaultValue = "", name="keyword")String keyword,
+         @PageableDefault(size=10, sort="id", direction = Sort.Direction.DESC)
+            Pageable pageable){
+      System.out.println(type);
+      System.out.println(keyword);
+      System.out.println(pageable);
       List<Post> list = postService.getPosts();
       return ResponseEntity.ok(list);
    }
@@ -49,7 +61,7 @@ public class PostController {
       ){
       MessageResponse ms;
       try {
-      ms = postService.insertPost(request, userDetails);
+         ms = postService.insertPost(request, userDetails);         
       }catch (Exception e) {
          ms = new MessageResponse(false, e.getMessage());
       }

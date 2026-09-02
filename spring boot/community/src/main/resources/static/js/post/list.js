@@ -21,7 +21,10 @@ async function getPosts(){
 			headers : {},
 			body : 보낼값
 		});*/
-		const response = await fetch("/api/posts");
+		
+		const queryString = '?' + new URLSearchParams(data).toString();
+		
+		const response = await fetch("/api/posts" + queryString);
 		
 		if(!response.ok){
 			throw Error("서버 상태 이상");
@@ -55,9 +58,23 @@ async function getPosts(){
 				</tr>
 			`;
 		}
-		
-		
 	}catch(e){
 		console.error("게시글 목록 불러오기 실패 : ", e);
 	}
+}
+
+const data= {
+type : 'all',
+keyword : '' 
+}
+/* ========================
+입력태그(input, selected, textare등)에 입력되면 입력된 값들을 
+가져와서 data 객체에 저장하도록 하는 함수
+- 단, data 객체는 전역으로 선언이 되어 있어야 한다.
+======================== */
+function changeInput (e){
+   //객체에 있는 값들을 변수에 쉽게 저장하는 방법
+    const {name,value} = e.target;
+    //객체에 있는 속성의 값을 변경
+   data[name] = value;
 }
